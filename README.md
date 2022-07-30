@@ -9,6 +9,7 @@ Created by: Gustavo Vinicius
 
 sudo docker-compose up -d --build
 sudo docker exec -it [-u 0] [container_name] sh
+sudo docker-compose down
 
 chmod +x composer.sh
 ./composer.sh
