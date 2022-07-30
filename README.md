@@ -16,13 +16,15 @@ sudo docker inspect [CONTAINER_ID] | grep IP
 chmod +x composer.sh
 ./composer.sh
 
-composer create-project laravel/laravel appname
+composer create-project laravel/laravel:^8.0 appname
 
 cp -R appname/* .
 rm -rf appname/
+
+php artisan key:generate
 ```
 
 ### Laravel 9
 
 - Configurations
-    - Config the database connection at the mysql flag in the config/database.php file
+    - Cop the .env file and setup the mysql IP container and auth data
