@@ -31,9 +31,7 @@ services:
               - 3306:3306
           environment:
               MYSQL_DATABASE: laravel
-              MYSQL_USER: gustavo
-              MYSQL_PASSWORD: cabecinhabranca
-              MYSQL_ROOT_PASSWORD: cabecinhabranca
+              MYSQL_ROOT_PASSWORD: laravel
           networks:
             - app-network
 

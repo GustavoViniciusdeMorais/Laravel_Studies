@@ -12,4 +12,9 @@ sudo docker exec -it [-u 0] [container_name] sh
 
 chmod +x composer.sh
 ./composer.sh
+
+composer create-project laravel/laravel appname
+
+cp -R appname/* .
+rm -rf appname/
 ```
