@@ -24,7 +24,25 @@ rm -rf appname/
 php artisan key:generate
 ```
 
-### Laravel 9
+### Laravel 8
 
 - Configurations
     - Cop the .env file and setup the mysql IP container and auth data
+
+### TDD Laravel 8
+
+- Steps:
+    - php artisan make:test BasicTest
+        - This class will be at tests/Feature/ folder.
+    - chmod -R 777 ./
+    - chmod +x composer.sh
+    - ./composer.sh
+    - Import the class to be tested into the Test class.
+    - Rename the BasicTest method.
+    - Inside the method write the test.
+        - Use $this->assertEquals('RESULT', $result);
+    - Run the command php artisan test
+
+```
+php artisan test
+```
