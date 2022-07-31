@@ -46,3 +46,5 @@ php artisan key:generate
 ```
 php artisan test
 ```
+
+![TDD](/imgs/tddLaravel.png)
