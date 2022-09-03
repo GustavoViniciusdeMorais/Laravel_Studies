@@ -22,6 +22,17 @@ cp -R appname/* .
 rm -rf appname/
 
 php artisan key:generate
+
+chmod +x clearcash.sh
+./clearcash.sh
+
+php artisan key:generate
+
+php artisan db:seed --class=GroupSeeder
+
+php artisan db:seed --class=UserSeeder
+
+sudo git remote set-url origin https://[token]@github.com/Repository
 ```
 
 ### Laravel 8
