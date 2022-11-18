@@ -9,6 +9,7 @@ services:
             - 80:80
         volumes:
             - ./:/var/www/html
+        container_name: nginx
         depends_on:
             - php
             - mysql
@@ -21,20 +22,38 @@ services:
             dockerfile: php.dockerfile
         volumes:
             - ./:/var/www/html
+        container_name: php
         networks:
             - app-network
 
     mysql:
-          image: mysql:5.7
-          restart: always
-          ports:
-              - 3306:3306
-          environment:
-              MYSQL_DATABASE: laravel
-              MYSQL_ROOT_PASSWORD: laravel
-          networks:
-            - app-network
+        image: mysql:5.7
+        restart: always
+        container_name: mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: laravel
+        volumes:
+            - ./dockerDBData:/var/lib/mysql
+        networks:
+            app-network:
+                ipv4_address: 10.0.0.8
+    
+    # redis:
+    #     image: redis
+    #     container_name: redis
+    #     ports:
+    #         - 6379:6379
+    #     networks:
+    #         app-network:
+    #             ipv4_address: 10.0.0.9
 
 networks:
     app-network:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: "10.0.0.0/16"
