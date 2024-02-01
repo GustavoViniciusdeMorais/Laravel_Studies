@@ -1,61 +1,137 @@
-# Laravel Setup DockerFiles
+# Location Package
 
-I build this repository to save the setup for Laravel projects with my docker files.
-
-Created by: Gustavo Vinicius
-
-```
-/etc/init.d/mysql stop
-
-sudo docker-compose up -d --build
-sudo docker exec -it [-u 0] [container_name] sh
-sudo docker-compose down
-
-sudo docker inspect [CONTAINER_ID] | grep IP
-
-chmod +x composer.sh
-./composer.sh
-
-composer create-project laravel/laravel:^8.0 appname
-
-cp -R appname/* .
-rm -rf appname/
-
-php artisan key:generate
-
-chmod +x clearcash.sh
-./clearcash.sh
-
-php artisan key:generate
-
-php artisan db:seed --class=GroupSeeder
-
-php artisan db:seed --class=UserSeeder
-
-sudo git remote set-url origin https://[token]@github.com/Repository
+## Install
 ```
 
-### Laravel 8
+https://packagist.org/packages/redninjaturtle/red-laravel-location
 
-- Configurations
-    - Cop the .env file and setup the mysql IP container and auth data
+composer require redninjaturtle/red-laravel-location
 
-### TDD Laravel 8
-
-- Steps:
-    - php artisan make:test BasicTest
-        - This class will be at tests/Feature/ folder.
-    - chmod -R 777 ./
-    - chmod +x composer.sh
-    - ./composer.sh
-    - Import the class to be tested into the Test class.
-    - Rename the BasicTest method.
-    - Inside the method write the test.
-        - Use $this->assertEquals('RESULT', $result);
-    - Run the command php artisan test
+# Remember to add the kernel config explained below.
 
 ```
-php artisan test
+
+### ./modules/Location/Providers/LocationServiceProvider.php
 ```
 
-![TDD](/imgs/tddLaravel.png)
+public function boot()
+{
+    Route::middleware(['web'])
+        ->group(__DIR__ . '/../Routes/web.php');
+    
+    $this->loadTranslationsFrom(__DIR__ . '/../lang', 'Location');
+}
+
+```
+
+### ./modules/Pages/Views/index.blade.php
+```
+
+<strong>{{ trans('Location::pages.title') . ' test' }}</strong>
+
+```
+
+### ./config/app.php
+```
+
+'providers' => [
+    /*
+    * Package Service Providers...
+    */
+    Modules\Pages\Providers\PageServiceProvider::class,
+    Redninjaturtle\RedLaravelLocation\Providers\LocationServiceProvider::class,
+],
+
+```
+
+### ./app/Http/Kernel.php
+```
+
+protected $middlewareGroups = [
+    'web' => [
+        \Redninjaturtle\RedLaravelLocation\Http\Middleware\Locale::class,
+    ],
+];
+
+```
+
+![TDD](/imgs/locationPack.png)
+
+## Facade
+
+### ./modules/Location/Location.php
+```
+
+namespace Redninjaturtle\RedLaravelLocation;
+
+class Location
+{
+
+    private $locale = 'en';
+
+    public function __construct($locale = 'en')
+    {
+        $this->locale = $locale;
+    }
+
+    public function getLocation()
+    {
+        return $this->locale;
+    }
+}
+
+```
+
+### ./modules/Location/Facades/LocationFacade.php
+```
+
+namespace Redninjaturtle\RedLaravelLocation\Facades;
+
+use Illuminate\Support\Facades\Facade;
+
+class LocationFacade extends Facade
+{
+
+    protected static function getFacadeAccessor()
+    {
+        return 'location';
+    }
+}
+
+```
+
+### ./modules/Location/Providers/LocationServiceProvider.php
+```
+
+public function register()
+{
+    $this->app->singleton('location', function($app){
+        return new Location('pt-br');
+    });
+}
+
+```
+
+### ./config/app.php
+```
+
+'aliases' => [
+    'Location' => Redninjaturtle\RedLaravelLocation\Facades\LocationFacade::class,
+],
+
+```
+
+### ./app/Http/Controllers/TestController.php
+```
+use Location;
+
+class TestController extends Controller
+{
+    
+    public function index()
+    {
+        $location = Location::getLocation();
+        return view('tests.index')->with(['location' => $location]);
+    }
+}
+```

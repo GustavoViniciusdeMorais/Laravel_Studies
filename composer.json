@@ -1,0 +1,27 @@
+{
+    "name": "redninjaturtle/red-laravel-location",
+    "description": "Location package",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Redninjaturtle\\RedLaravelLocation\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gustavo Vinicius"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Redninjaturtle\\RedLaravelLocation\\Providers\\LocationServiceProvider"
+            ],
+            "aliases": {
+                "Location": "Redninjaturtle\\RedLaravelLocation\\Facades\\LocationFacade"
+            }
+        }
+    }
+}
