@@ -10,48 +10,41 @@ services:
         volumes:
             - ./:/var/www/html
         container_name: gusphp
-        # depends_on:
-        #     - mysql
-        #     - mailhog_yii
+        depends_on:
+            - postgres
+            # - my_rabbitmq
         networks:
-            - gus-php-network
+            gus-laravel-network:
+                ipv4_address: 12.0.0.8
 
-    # mysql:
-    #     image: mysql:5.7
-    #     restart: always
-    #     container_name: craftmysql
+    postgres:
+        image: postgres
+        restart: always
+        container_name: postgres
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        networks:
+            gus-laravel-network:
+                ipv4_address: 12.0.0.7
+
+    # my_rabbitmq:
+    #     image: rabbitmq:3.9-management
+    #     container_name: my_rabbitmq
     #     ports:
-    #         - 3306:3306
-    #     environment:
-    #         MYSQL_DATABASE: laravel
-    #         MYSQL_ROOT_PASSWORD: laravel
-    #     volumes:
-    #         - ./dockerDBData:/var/lib/mysql
+    #         - '5672:5672'
+    #         - '15672:15672'
     #     networks:
-    #         gus-php-network:
-    #             ipv4_address: 12.0.0.8
-    
-    # mailhog_yii:
-    #     image: mailhog/mailhog
-    #     container_name: mailhog_yii
-    #     ports:
-    #         - 1025:1025
-    #         - 8025:8025
-    #     networks:
-    #          gus-php-network:
-    #             ipv4_address: 12.0.0.10
-    
-    # redis:
-    #     image: redis
-    #     container_name: redis
-    #     ports:
-    #         - 6379:6379
-    #     networks:
-    #         gus-php-network:
+    #         gus-laravel-network:
     #             ipv4_address: 12.0.0.9
 
 networks:
-    gus-php-network:
+    gus-laravel-network:
         driver: bridge
         ipam:
             driver: default
