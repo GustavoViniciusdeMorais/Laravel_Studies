@@ -1,0 +1,28 @@
+{
+    "name": "gustavomorais/article",
+    "version": "1.0.0",
+    "description": "Article package",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GustavoMorais\\Article\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gustavo Vinicius"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GustavoMorais\\Article\\Providers\\ArticleProvider"
+            ],
+            "aliases": {
+                "Location": "GustavoMorais\\Article\\Facades\\ArticleFacade"
+            }
+        }
+    }
+}
