@@ -27,7 +27,8 @@ $app->withFacades(true, [
     'GustavoMorais\Article\Facades\ArticleFacade' => 'Article'
 ]);
 
-// $app->withEloquent();
+$app->withEloquent();
+$app->configure('database');
 
 /*
 |--------------------------------------------------------------------------

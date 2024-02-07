@@ -9,7 +9,7 @@ class ArticleProvider extends ServiceProvider
 {
     public function boot()
     {
-        // code...
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     public function register()

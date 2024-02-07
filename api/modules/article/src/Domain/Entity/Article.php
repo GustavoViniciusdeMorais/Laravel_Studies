@@ -2,90 +2,28 @@
 
 namespace GustavoMorais\Article\Domain\Entity;
 
-class Article
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Article extends Model
 {
-    private int $id;
-    private $title;
-    private $content;
-    private $author;
-    private \DateTime $created_at;
-    private \DateTime $updated_at;
-    private \DateTime $deleted_at;
+    use HasUuids, SoftDeletes;
 
-    public function getId(): int
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'articles';
+
+    /**
+     * Get the columns that should receive a unique identifier.
+     *
+     * @return array<int, string>
+     */
+    public function uniqueIds(): array
     {
-        return $this->id;
-    }
-
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function getAuthor(): string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): void
-    {
-        $this->author = $author;
-    }
-
-    public function getCreatedAt(): ?\DateTime
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTime $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(\DateTime $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTime
-    {
-        return $this->deleted_at;
-    }
-
-    public function setDeletedAt(\DateTime $deleted_at): self
-    {
-        $this->deleted_at = $deleted_at;
-
-        return $this;
+        return ['id'];
     }
 }
