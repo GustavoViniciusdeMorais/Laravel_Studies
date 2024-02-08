@@ -9,12 +9,16 @@
             "GustavoMorais\\Article\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "GustavoMorais\\Tests\\": "tests"
+        }
+    },    
     "authors": [
         {
             "name": "Gustavo Vinicius"
         }
     ],
-    "require": {},
     "extra": {
         "laravel": {
             "providers": [
@@ -24,5 +28,8 @@
                 "Location": "GustavoMorais\\Article\\Facades\\ArticleFacade"
             }
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0"
     }
 }
