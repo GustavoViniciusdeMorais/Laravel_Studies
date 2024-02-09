@@ -2,35 +2,32 @@
 
 namespace GustavoMorais\Tests\Feature;
 
-use GustavoMorais\Article\Providers\ArticleProvider;
+use GustavoMorais\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class GetArticlesTest extends \Orchestra\Testbench\TestCase
+class GetArticlesTest extends TestCase
 {
+    use RefreshDatabase;
+
     // Use annotation @test so that PHPUnit knows about the test
     /** @test */
-    public function visit_test_route()
+    public function testGetArticles()
     {
-        // Visit /test and see "Test Laravel package isolated" on it
-        $response = $this->get('test');
-        $response->assertStatus(200);
-        $response->assertSee('Test Laravel package isolated');
-    }
+        // $response = $this->get('api/articles');
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        // additional setup
-    }
+        // $response->assertStatus(200);
+        // $response->assertJson([
+        //     'success' => true,
+        //     // Add more assertions based on the expected response structure
+        // ]);
+        // Initialize cURL session
+        $ch = curl_init();
 
-    protected function getPackageProviders($app)
-    {
-        return [
-            ArticleProvider::class,
-        ];
-    }
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/articles'); // Replace 'http://your-api-domain' with your actual API domain
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    protected function getEnvironmentSetUp($app)
-    {
-        // perform environment setup
+        // Execute cURL request
+        $response = curl_exec($ch);
     }
 }

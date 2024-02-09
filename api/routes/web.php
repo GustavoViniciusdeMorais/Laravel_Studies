@@ -26,8 +26,4 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'data' => true
         ]);
     });
-
-    $router->get('/articles', [
-        'as' => 'articles', 'uses' => 'ArticleController@listArticles'
-    ]);
 });

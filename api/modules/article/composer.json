@@ -4,6 +4,9 @@
     "description": "Article package",
     "type": "library",
     "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.1"
+    },
     "autoload": {
         "psr-4": {
             "GustavoMorais\\Article\\": "src"
