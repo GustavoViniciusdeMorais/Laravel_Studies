@@ -4,9 +4,6 @@
     "description": "Article package",
     "type": "library",
     "license": "MIT",
-    "require": {
-        "php": "^7.3|^8.1"
-    },
     "autoload": {
         "psr-4": {
             "GustavoMorais\\Article\\": "src"
@@ -33,6 +30,11 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0"
+        "phpunit/phpunit": "^8.2"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/routing": "^10.43",
+        "illuminate/http": "^10.43"
     }
 }

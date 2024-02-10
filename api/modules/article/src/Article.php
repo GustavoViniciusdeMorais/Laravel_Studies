@@ -6,6 +6,6 @@ class Article
 {
     public function check():?string
     {
-        return "article test";
+        return "This Article class exposes the package resources";
     }
 }
