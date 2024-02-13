@@ -12,12 +12,12 @@ Route::get('api/articles/check', function () {
     ]);
 });
 
-// Route::get('api/articles', function () {
-//     return new JsonResponse([
-//         'status' => 'success',
-//         'data' => true
-//     ]);
-// });
-
-// Route::get('/api/articles', 'GustavoMorais\Article\Infrastructure\Controllers\ArticleController@listArticles');
-Route::get('/api/articles', [ArticleController::class, 'listArticles']);
+Route::group(
+    [
+        'prefix' => 'api',
+        'namespace' => 'GustavoMorais\Article\Infrastructure\Controllers'
+    ],
+    function () {
+        Route::get('articles', ['uses' => 'ArticleController@listArticles']);
+    }
+);
