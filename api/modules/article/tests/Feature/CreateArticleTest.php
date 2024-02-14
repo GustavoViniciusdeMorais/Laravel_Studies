@@ -10,7 +10,7 @@ class CreateArticleTest extends MainTestCase
 
     // Use annotation @test so that PHPUnit knows about the test
     /** @test */
-    public function testGetArticles()
+    public function testCreateArticle()
     {
         $client = new Client();
         $response = $client->request('POST', 'http://localhost/api/articles', [
