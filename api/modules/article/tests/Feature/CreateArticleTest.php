@@ -5,7 +5,7 @@ namespace GustavoMorais\Tests\Feature;
 use GustavoMorais\Tests\MainTestCase;
 use GuzzleHttp\Client;
 
-class GetArticlesTest extends MainTestCase
+class CreateArticleTest extends MainTestCase
 {
 
     // Use annotation @test so that PHPUnit knows about the test
@@ -13,11 +13,19 @@ class GetArticlesTest extends MainTestCase
     public function testGetArticles()
     {
         $client = new Client();
-        $response = $client->request('GET', 'http://localhost/api/articles');
+        $response = $client->request('POST', 'http://localhost/api/articles', [
+            'form_params' => [
+                'title' => 'test',
+                'body' => 'test',
+            ]
+        ]);
         $content = json_decode($response->getBody()->getContents());
         
         $this->assertEquals('200', $response->getStatusCode());
-        if (isset($content->status)) {
+        if (
+            isset($content->status)
+            && isset($content->data->title)
+        ) {
             $this->assertEquals('success', $content->status);
         }
     }

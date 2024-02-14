@@ -19,5 +19,6 @@ Route::group(
     ],
     function () {
         Route::get('articles', ['uses' => 'ArticleController@listArticles']);
+        Route::post('articles', ['uses' => 'ArticleController@createArticle']);
     }
 );

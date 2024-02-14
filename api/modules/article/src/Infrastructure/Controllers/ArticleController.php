@@ -16,4 +16,13 @@ class ArticleController extends BaseController
             return $this->error();
         }
     }
+
+    public function createArticle()
+    {
+        try {
+            return false;
+        } catch (\Exception $e) {
+            return $this->error();
+        }
+    }
 }

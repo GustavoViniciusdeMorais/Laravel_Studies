@@ -1,0 +1,10 @@
+{
+    "status": "success",
+    "message": "Operation executed with success",
+    "data": [
+        {
+            "title": "test",
+            "body": "test"
+        }
+    ]
+}
