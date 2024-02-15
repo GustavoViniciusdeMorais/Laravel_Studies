@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid', 100);
             $table->string('title', 100);
             $table->text('body');
             $table->softDeletes();

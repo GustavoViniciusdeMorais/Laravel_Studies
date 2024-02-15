@@ -24,6 +24,6 @@ class Article extends Model
      */
     public function uniqueIds(): array
     {
-        return ['id'];
+        return ['uuid'];
     }
 }

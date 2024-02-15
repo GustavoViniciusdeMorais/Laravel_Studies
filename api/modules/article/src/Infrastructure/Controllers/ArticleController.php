@@ -3,7 +3,9 @@
 namespace GustavoMorais\Article\Infrastructure\Controllers;
 
 use GustavoMorais\Article\Application\Queries\GetArticlesAction;
+use GustavoMorais\Article\Application\Commands\CreateArticleAction;
 use GustavoMorais\Article\Infrastructure\Controllers\BaseController;
+use Illuminate\Http\Request;
 
 class ArticleController extends BaseController
 {
@@ -17,10 +19,10 @@ class ArticleController extends BaseController
         }
     }
 
-    public function createArticle()
+    public function createArticle(Request $request)
     {
         try {
-            return false;
+            return $this->success((new CreateArticleAction())->setData($request->all())->execute());
         } catch (\Exception $e) {
             return $this->error();
         }

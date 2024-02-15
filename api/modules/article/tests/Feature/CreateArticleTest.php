@@ -19,14 +19,18 @@ class CreateArticleTest extends MainTestCase
                 'body' => 'test',
             ]
         ]);
-        $content = json_decode($response->getBody()->getContents());
         
+        $content = json_decode($response->getBody()->getContents());
+        $expectedResponse = __DIR__ . '/../Responses/CreateArticle.json';
+        $expectedResponse = json_decode(file_get_contents($expectedResponse));
+
         $this->assertEquals('200', $response->getStatusCode());
         if (
             isset($content->status)
             && isset($content->data->title)
         ) {
             $this->assertEquals('success', $content->status);
+            $this->assertEquals($expectedResponse->data[0]->title, $content->data->title);
         }
     }
 }

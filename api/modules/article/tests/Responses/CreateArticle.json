@@ -1,6 +1,6 @@
 {
     "status": "success",
-    "message": "Operation executed with success",
+    "message": "Operation executed successfully",
     "data": [
         {
             "title": "test",
