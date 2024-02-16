@@ -1,0 +1,40 @@
+{
+    "name": "gustavomorais/user",
+    "version": "1.0.0",
+    "description": "User package",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GustavoMorais\\User\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GustavoMorais\\Tests\\": "tests"
+        }
+    },    
+    "authors": [
+        {
+            "name": "Gustavo Vinicius"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GustavoMorais\\User\\Providers\\UserProvider"
+            ],
+            "aliases": {
+                "Location": "GustavoMorais\\User\\Facades\\UserFacade"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.2"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/routing": "^10.43",
+        "illuminate/http": "^10.43"
+    }
+}

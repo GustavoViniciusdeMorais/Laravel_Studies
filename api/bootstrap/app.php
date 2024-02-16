@@ -98,6 +98,7 @@ $app->configure('app');
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(GustavoMorais\Article\Providers\ArticleProvider::class);
+$app->register(GustavoMorais\User\Providers\UserProvider::class);
 
 /*
 |--------------------------------------------------------------------------

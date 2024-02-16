@@ -2,7 +2,6 @@
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
-use GustavoMorais\Article\Infrastructure\Controllers\ArticleController;
 
 Route::get('api/articles/check', function () {
     return new JsonResponse([

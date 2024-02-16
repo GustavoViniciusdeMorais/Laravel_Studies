@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff34c3529d83f149758e3ec04d8c0577",
+    "content-hash": "c60b67f95cf51ff6c29c304cf73d3601",
     "packages": [
         {
             "name": "brick/math",
@@ -605,6 +605,56 @@
                 }
             ],
             "description": "Article package",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "gustavomorais/user",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/user",
+                "reference": "c7cb5b8e27edde8045d49bc4e401dc6c79b6f742"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.8",
+                "illuminate/http": "^10.43",
+                "illuminate/routing": "^10.43"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GustavoMorais\\User\\Providers\\UserProvider"
+                    ],
+                    "aliases": {
+                        "Location": "GustavoMorais\\User\\Facades\\UserFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GustavoMorais\\User\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "GustavoMorais\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Vinicius"
+                }
+            ],
+            "description": "User package",
             "transport-options": {
                 "relative": true
             }
