@@ -17,6 +17,6 @@ Route::group(
         'namespace' => 'GustavoMorais\User\Infrastructure\Controllers'
     ],
     function () {
-        // Route::get('users', ['uses' => 'ArticleController@listArticles']);
+        Route::post('users', ['uses' => 'UserController@createUser']);
     }
 );
