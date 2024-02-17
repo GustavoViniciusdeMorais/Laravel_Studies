@@ -1,0 +1,10 @@
+{
+    "status": "success",
+    "message": "Operation executed successfully",
+    "data": [
+        {
+            "token": "",
+            "refresh_token": ""
+        }
+    ]
+}

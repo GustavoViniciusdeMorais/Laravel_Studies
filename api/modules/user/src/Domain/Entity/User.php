@@ -10,6 +10,8 @@ class User extends Model
 {
     use HasUuids, SoftDeletes;
 
+    protected $jwtSecret = 'e884a9d4ff6b705d7f71a3';
+
     /**
      * The table associated with the model.
      *
@@ -30,5 +32,19 @@ class User extends Model
     public function generateHashPassword($password)
     {
         return password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    public function verifyHashPassword($password)
+    {
+        if (password_verify($password, $this->password)) {
+            return $this;
+        } else {
+            throw new \Exception('Invalid user password');
+        }
+    }
+
+    public function getJwtSecret()
+    {
+        return $this->jwtSecret;
     }
 }

@@ -18,5 +18,6 @@ Route::group(
     ],
     function () {
         Route::post('users', ['uses' => 'UserController@createUser']);
+        Route::post('users/login', ['uses' => 'AuthController@login']);
     }
 );

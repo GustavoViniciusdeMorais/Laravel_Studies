@@ -35,6 +35,7 @@
     "require": {
         "guzzlehttp/guzzle": "^7.8",
         "illuminate/routing": "^10.43",
-        "illuminate/http": "^10.43"
+        "illuminate/http": "^10.43",
+        "firebase/php-jwt": "^6.10"
     }
 }
