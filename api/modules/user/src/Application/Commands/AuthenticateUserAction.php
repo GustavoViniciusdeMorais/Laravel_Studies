@@ -18,16 +18,9 @@ class AuthenticateUserAction extends BaseAction
         if (!empty($user) && isset($user->id)) {
             $validUser = $user->verifyHashPassword($authData->password);
             if ($validUser) {
-                $issued_at = time();
-                $expiration_time = $issued_at + (60 * 60);
-                $payload = [
-                    'iat' => $issued_at,
-                    'exp' => $expiration_time,
-                    'sub' => $validUser->email
-                ];
-                
                 $token = [
-                    'token' => JWT::encode($payload, $validUser->getJwtSecret(), 'HS256')
+                    'token' => $this->generateToken($validUser),
+                    'refresh_token' => $this->generateRefreshToken($validUser),
                 ];
             }
         } else {
@@ -35,5 +28,39 @@ class AuthenticateUserAction extends BaseAction
         }
 
         return $token;
+    }
+
+    public function generateToken($user)
+    {
+        $token = null;
+        if ($user) {
+            $issued_at = time();
+            $expiration_time = $issued_at + (60 * 60);
+            $payload = [
+                'iat' => $issued_at,
+                'exp' => $expiration_time,
+                'sub' => $user->email
+            ];
+            
+            $token = JWT::encode($payload, $user->getJwtSecret(), 'HS256');
+        }
+        return $token;
+    }
+
+    public function generateRefreshToken($user)
+    {
+        $refreshToken = null;
+        if ($user) {
+            $issued_at = time();
+            $expiration_time = $issued_at + (3600 * 24);
+            $payload = [
+                'iat' => $issued_at,
+                'exp' => $expiration_time,
+                'sub' => $user->email
+            ];
+            
+            $refreshToken = JWT::encode($payload, $user->getJwtSecret(), 'HS256');
+        }
+        return $refreshToken;
     }
 }

@@ -30,6 +30,7 @@ class AuthenticateUserTest extends MainTestCase
 
         $data = json_decode(json_encode($content->data), true);
         $this->assertContainsEquals('token', array_keys($data));
+        $this->assertContainsEquals('refresh_token', array_keys($data));
 
         print_r(json_encode(['response' => $content]));echo "\n\n";
     }
