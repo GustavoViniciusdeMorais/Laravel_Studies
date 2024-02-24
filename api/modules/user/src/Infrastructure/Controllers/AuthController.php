@@ -2,6 +2,7 @@
 
 namespace GustavoMorais\User\Infrastructure\Controllers;
 
+use GustavoMorais\User\Application\Commands\RefreshUserAction;
 use GustavoMorais\User\Application\Commands\AuthenticateUserAction;
 use GustavoMorais\User\Application\Commands\VerifyUserAction;
 use GustavoMorais\Article\Infrastructure\Controllers\BaseController;
@@ -25,6 +26,17 @@ class AuthController extends BaseController
         try {
             return $this->success(
                 (new VerifyUserAction())->setData($request)->execute()
+            );
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
+    public function refresh(Request $request)
+    {
+        try {
+            return $this->success(
+                (new RefreshUserAction())->setData($request)->execute()
             );
         } catch (\Exception $e) {
             return $this->error($e->getMessage());

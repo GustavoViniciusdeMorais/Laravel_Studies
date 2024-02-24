@@ -4,7 +4,8 @@
     "data": [
         {
             "email": "test@email.com",
-            "token": ""
+            "token": "",
+            "refresh_token": ""
         }
     ]
 }

@@ -56,7 +56,10 @@ class AuthenticateUserAction extends BaseAction
             $payload = [
                 'iat' => $issued_at,
                 'exp' => $expiration_time,
-                'sub' => $user->email
+                'sub' => [
+                    "email" => $user->email,
+                    "type" => "refresh"
+                ]
             ];
             
             $refreshToken = JWT::encode($payload, $user->getJwtSecret(), 'HS256');

@@ -5,19 +5,19 @@ namespace GustavoMorais\Tests\Feature;
 use GustavoMorais\Tests\MainTestCase;
 use GuzzleHttp\Client;
 
-class VerifyJwtTest extends MainTestCase
+class RefreshTokenTest extends MainTestCase
 {
-
     // Use annotation @test so that PHPUnit knows about the test
     /** @test */
-    public function testVerifyJwt()
+    public function testRefreshToken()
     {
         $requestData = __DIR__ . '/../RequestData/Authentication.json';
         $requestData = json_decode(file_get_contents($requestData));
+
         $client = new Client();
-        $response = $client->request('GET', 'http://localhost/api/users/verify', [
+        $response = $client->request('GET', 'http://localhost/api/users/refresh', [
             'headers' => [
-                'Authorization' => "Bearer {$requestData->token}",
+                'Authorization' => "Bearer {$requestData->refresh_token}",
             ]
         ]);
         
@@ -30,6 +30,7 @@ class VerifyJwtTest extends MainTestCase
 
         $data = json_decode(json_encode($content->data), true);
         $this->assertContainsEquals('token', array_keys($data));
+        $this->assertContainsEquals('refresh_token', array_keys($data));
         $this->assertContainsEquals('email', array_keys($data));
         $this->assertEquals($expectedResponse->data[0]->email, $content->data->email);
     }

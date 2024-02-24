@@ -20,5 +20,6 @@ Route::group(
         Route::post('users', ['uses' => 'UserController@createUser']);
         Route::post('users/login', ['uses' => 'AuthController@login']);
         Route::get('users/verify', ['uses' => 'AuthController@verify']);
+        Route::get('users/refresh', ['uses' => 'AuthController@refresh']);
     }
 );
