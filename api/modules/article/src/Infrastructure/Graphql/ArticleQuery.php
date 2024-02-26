@@ -6,9 +6,10 @@ use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Query;
 use GustavoMorais\Article\Domain\Entity\Article;
 
-class ArticleQuery
+class ArticleQuery extends Query
 {
     protected $attributes = [
         'name' => 'article',

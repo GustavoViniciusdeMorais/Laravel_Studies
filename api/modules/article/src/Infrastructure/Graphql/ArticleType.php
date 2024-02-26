@@ -4,8 +4,9 @@ namespace GustavoMorais\Article\Infrastructure\Graphql;
 
 use GraphQL\Type\Definition\Type;
 use GustavoMorais\Article\Domain\Entity\Article;
+use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class ArticleType
+class ArticleType extends GraphQLType
 {
     protected $attributes = [
         'name' => 'article',
