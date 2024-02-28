@@ -36,6 +36,6 @@
         "guzzlehttp/guzzle": "^7.8",
         "illuminate/routing": "^10.43",
         "illuminate/http": "^10.43",
-        "rebing/graphql-laravel": "^9.3"
+        "webonyx/graphql-php": "^15.9"
     }
 }

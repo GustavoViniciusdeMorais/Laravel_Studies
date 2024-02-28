@@ -15,7 +15,6 @@ class ArticleProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/graphql.php', 'article_graphql_package');
         $this->app->singleton('article', function($app){
             return new Article();
         });

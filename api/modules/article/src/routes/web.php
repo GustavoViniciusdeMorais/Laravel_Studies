@@ -21,15 +21,6 @@ Route::group(
     function () {
         Route::get('articles', ['uses' => 'ArticleController@listArticles']);
         Route::post('articles', ['uses' => 'ArticleController@createArticle']);
-        Route::get('articles/graphql', function(Request $request) {
-            $schema = app(ArticleSchema::class);
-            $query = $request->input('query');
-            $variables = $request->input('variables', []);
-            $operationName = $request->input('operationName');
-            $context = [];
-            $result = $schema->executeQuery($query, $variables, $context, $operationName);
-            
-            return $result;
-        });
+        Route::post('articles/graphql', ['uses' => 'ArticleController@graphql']);
     }
 );
