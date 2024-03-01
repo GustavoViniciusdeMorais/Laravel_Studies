@@ -11,37 +11,37 @@ services:
             - ./:/var/www/html
         container_name: gusphp
         depends_on:
-            - postgres
-            # - my_rabbitmq
+            # - postgres
+            - my_rabbitmq
         networks:
             gus-laravel-network:
                 ipv4_address: 12.0.0.8
 
-    postgres:
-        image: postgres
-        restart: always
-        container_name: postgres
-        ports:
-            - 5432:5432
-        environment:
-            - POSTGRES_DB=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-        volumes:
-            - ./data/db:/var/lib/postgresql/data
-        networks:
-            gus-laravel-network:
-                ipv4_address: 12.0.0.7
-
-    # my_rabbitmq:
-    #     image: rabbitmq:3.9-management
-    #     container_name: my_rabbitmq
+    # postgres:
+    #     image: postgres
+    #     restart: always
+    #     container_name: postgres
     #     ports:
-    #         - '5672:5672'
-    #         - '15672:15672'
+    #         - 5432:5432
+    #     environment:
+    #         - POSTGRES_DB=postgres
+    #         - POSTGRES_USER=postgres
+    #         - POSTGRES_PASSWORD=postgres
+    #     volumes:
+    #         - ./data/db:/var/lib/postgresql/data
     #     networks:
     #         gus-laravel-network:
-    #             ipv4_address: 12.0.0.9
+    #             ipv4_address: 12.0.0.7
+
+    my_rabbitmq:
+        image: rabbitmq:3.9-management
+        container_name: my_rabbitmq
+        ports:
+            - '5672:5672'
+            - '15672:15672'
+        networks:
+            gus-laravel-network:
+                ipv4_address: 12.0.0.9
 
 networks:
     gus-laravel-network:

@@ -27,6 +27,7 @@ class ArticleController extends BaseController
         try {
             return $this->success((new CreateArticleAction())->setData($request->all())->execute());
         } catch (\Exception $e) {
+            print_r(json_encode(['error' => $e->getMessage()]));echo "\n\n";exit;
             return $this->error();
         }
     }
