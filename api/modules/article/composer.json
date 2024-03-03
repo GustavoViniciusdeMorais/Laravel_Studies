@@ -36,6 +36,8 @@
         "guzzlehttp/guzzle": "^7.8",
         "illuminate/routing": "^10.43",
         "illuminate/http": "^10.43",
-        "webonyx/graphql-php": "^15.9"
+        "webonyx/graphql-php": "^15.9",
+        "php-amqplib/php-amqplib": "^3.0",
+        "swiftmailer/swiftmailer": "^6.0"
     }
 }

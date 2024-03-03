@@ -15,6 +15,7 @@
         "gustavomorais/user": "^1.0",
         "illuminate/database": "^10.43",
         "laravel/lumen-framework": "^10.0",
+        "php-amqplib/php-amqplib": "^3.6",
         "rebing/graphql-laravel": "^9.3"
     },
     "require-dev": {

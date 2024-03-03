@@ -23,7 +23,7 @@ class CreateArticleTest extends MainTestCase
         $content = json_decode($response->getBody()->getContents());
         $expectedResponse = __DIR__ . '/../Responses/CreateArticle.json';
         $expectedResponse = json_decode(file_get_contents($expectedResponse));
-
+        print_r(json_encode(['expected' => $expectedResponse, 'actual' => $content]));echo "\n\n";
         $this->assertEquals('200', $response->getStatusCode());
         if (
             isset($content->status)

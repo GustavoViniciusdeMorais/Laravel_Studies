@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use GustavoMorais\Article\Infrastructure\Graphql\ArticleResolver;
 use GraphQL\Executor\Executor;
 use GraphQL\Type\Definition\ResolveInfo;
+use GustavoMorais\Article\Infrastructure\Queue\Producer;
 
 class ArticleController extends BaseController
 {
@@ -16,6 +17,8 @@ class ArticleController extends BaseController
     {
         try {
             $articles = (new GetArticlesAction())->execute();
+            $producer = new Producer();
+            $producer->produce("test@email.com", "Article reader");
             return $this->success($articles);
         } catch (\Exception $e) {
             return $this->error();
