@@ -1,5 +1,7 @@
 # API Doc
 
+<img src="./imgs/LumenAPI.png" width="500" height="300">
+
 ### 
 - REST JSON
 - GraphQL
