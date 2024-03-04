@@ -22,5 +22,6 @@ Route::group(
         Route::get('articles', ['uses' => 'ArticleController@listArticles']);
         Route::post('articles', ['uses' => 'ArticleController@createArticle']);
         Route::post('articles/graphql', ['uses' => 'ArticleController@graphql']);
+        Route::post('articles/filter', ['uses' => 'ArticleController@filter']);
     }
 );

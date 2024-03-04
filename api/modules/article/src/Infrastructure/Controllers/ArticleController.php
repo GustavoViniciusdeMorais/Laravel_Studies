@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use GustavoMorais\Article\Infrastructure\Graphql\ArticleResolver;
 use GraphQL\Executor\Executor;
 use GraphQL\Type\Definition\ResolveInfo;
+use GustavoMorais\Article\Application\Queries\FilterArticleByTitleAction;
 use GustavoMorais\Article\Infrastructure\Queue\Producer;
 
 class ArticleController extends BaseController
@@ -30,7 +31,6 @@ class ArticleController extends BaseController
         try {
             return $this->success((new CreateArticleAction())->setData($request->all())->execute());
         } catch (\Exception $e) {
-            print_r(json_encode(['error' => $e->getMessage()]));echo "\n\n";exit;
             return $this->error();
         }
     }
@@ -81,5 +81,18 @@ class ArticleController extends BaseController
                 }
                 return Executor::defaultFieldResolver($source, $args, $context, $info);
         });
+    }
+
+    public function filter(Request $request)
+    {
+        try {
+            return $this->success(
+                (new FilterArticleByTitleAction())
+                    ->setData($request->all())
+                    ->execute()
+            );
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }

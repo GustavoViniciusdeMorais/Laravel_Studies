@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 class BaseController extends Controller
 {
     public function success(
-        $data,
+        $data = null,
         $status = "success",
         $message = "Operation executed successfully"
     ) {
