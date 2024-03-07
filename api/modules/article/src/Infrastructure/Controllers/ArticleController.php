@@ -11,6 +11,7 @@ use GraphQL\Executor\Executor;
 use GraphQL\Type\Definition\ResolveInfo;
 use GustavoMorais\Article\Application\Queries\FilterArticleByTitleAction;
 use GustavoMorais\Article\Infrastructure\Queue\Producer;
+use GustavoMorais\Article\Infrastructure\Events\SearchedArticlesEvent;
 
 class ArticleController extends BaseController
 {
@@ -91,6 +92,7 @@ class ArticleController extends BaseController
                     ->setData($request->all())
                     ->execute()
             );
+            event(new SearchedArticlesEvent("test"));
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

@@ -18,5 +18,6 @@ class ArticleProvider extends ServiceProvider
         $this->app->singleton('article', function($app){
             return new Article();
         });
+        $this->app->register(EventServiceProvider::class);
     }
 }
