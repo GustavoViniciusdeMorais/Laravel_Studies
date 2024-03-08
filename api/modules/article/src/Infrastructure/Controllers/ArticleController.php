@@ -87,12 +87,12 @@ class ArticleController extends BaseController
     public function filter(Request $request)
     {
         try {
+            event(new SearchedArticlesEvent("Someone searched about articles"));
             return $this->success(
                 (new FilterArticleByTitleAction())
                     ->setData($request->all())
                     ->execute()
             );
-            event(new SearchedArticlesEvent("test"));
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

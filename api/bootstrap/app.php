@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades(true, [
     'GustavoMorais\Article\Facades\ArticleFacade' => 'Article',
-]);
+    ]);
 
 $app->withEloquent();
 $app->configure('database');

@@ -29,8 +29,7 @@ class SearchedArticlesListener
     public function handle(SearchedArticlesEvent $event)
     {
         $producer = new Producer();
-        $producer->produce("test@email.com", "Article reader");
-        Log::info('SearchedArticlesEvent');
-        print_r(json_encode(['searched' => $event->data]));echo "\n\n";exit;
+        $producer->produce("test@email.com", $event->data);
+        Log::info("SearchedArticlesEvent:  {$event->data}");
     }
 }
