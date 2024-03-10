@@ -12,13 +12,17 @@ use GraphQL\Type\Definition\ResolveInfo;
 use GustavoMorais\Article\Application\Queries\FilterArticleByTitleAction;
 use GustavoMorais\Article\Infrastructure\Queue\Producer;
 use GustavoMorais\Article\Infrastructure\Events\SearchedArticlesEvent;
+use GustavoMorais\Article\Infrastructure\Repositories\ArticleEloquentRepository;
 
 class ArticleController extends BaseController
 {
     public function listArticles()
     {
         try {
-            $articles = (new GetArticlesAction())->execute();
+            $articles = (
+                new GetArticlesAction(new ArticleEloquentRepository())
+            )
+            ->execute();
             $producer = new Producer();
             $producer->produce("test@email.com", "Article reader");
             return $this->success($articles);
@@ -30,7 +34,11 @@ class ArticleController extends BaseController
     public function createArticle(Request $request)
     {
         try {
-            return $this->success((new CreateArticleAction())->setData($request->all())->execute());
+            return $this->success(
+                (new CreateArticleAction(new ArticleEloquentRepository()))
+                ->setData($request->all())
+                ->execute()
+            );
         } catch (\Exception $e) {
             return $this->error();
         }
@@ -44,7 +52,9 @@ class ArticleController extends BaseController
             $query = $input['query'];
             $variables = isset($input['variables']) ? $input['variables'] : null;
 
-            $this->setResolvers(ArticleResolver::resolve());
+            $this->setResolvers(
+                ArticleResolver::resolve(new ArticleEloquentRepository())
+            );
             $schema = \GraphQL\Utils\BuildSchema::build(file_get_contents(__DIR__ . '/../Graphql/schema.graphqls'));
 
             $result = \GraphQL\GraphQL::executeQuery($schema, $query, null, null, $variables);
@@ -89,7 +99,7 @@ class ArticleController extends BaseController
         try {
             event(new SearchedArticlesEvent("Someone searched about articles"));
             return $this->success(
-                (new FilterArticleByTitleAction())
+                (new FilterArticleByTitleAction(new ArticleEloquentRepository()))
                     ->setData($request->all())
                     ->execute()
             );

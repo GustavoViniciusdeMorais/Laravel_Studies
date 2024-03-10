@@ -4,11 +4,18 @@ namespace GustavoMorais\Article\Application\Queries;
 
 use GustavoMorais\Article\Application\BaseAction;
 use GustavoMorais\Article\Domain\Entity\Article;
+use GustavoMorais\Article\Domain\Repositories\ArticleRepository;
 
 class GetArticlesAction extends BaseAction
 {
+    private $repository;
+    
+    public function __construct(ArticleRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     public function execute()
     {
-        return Article::all();
+        return $this->repository->findAll();
     }
 }

@@ -15,7 +15,7 @@ class FilterArticleByTitleTest extends MainTestCase
         $client = new Client();
         $response = $client->request('POST', 'http://localhost/api/articles/filter', [
             'form_params' => [
-                'title' => 'abc',
+                'title' => 'test',
             ]
         ]);
         $content = json_decode($response->getBody()->getContents());
