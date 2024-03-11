@@ -7,7 +7,10 @@ use GustavoMorais\Article\Domain\Entity\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use GustavoMorais\Article\Infrastructure\Observers\ArticleObserver;
 
+#[ObservedBy(ArticleObserver::class)]
 class ArticleEloquentRepository extends Model implements ArticleRepository
 {
     use HasUuids, SoftDeletes;
