@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    nginx:
+    api:
         build:
             context: .
             dockerfile: ubuntu.dockerfile
@@ -9,36 +9,37 @@ services:
             - 80:80
         volumes:
             - ./:/var/www/html
-        container_name: gusphp
+        container_name: api
         # depends_on:
-        #     - mysql
-        #     - mailhog_yii
+            # - postgres
         networks:
-            - gus-php-network
+            php-network:
+                ipv4_address: 12.0.0.8
 
-    # mysql:
-    #     image: mysql:5.7
+    # postgres:
+    #     image: postgres
     #     restart: always
-    #     container_name: craftmysql
+    #     container_name: postgres
     #     ports:
-    #         - 3306:3306
+    #         - 5432:5432
     #     environment:
-    #         MYSQL_DATABASE: laravel
-    #         MYSQL_ROOT_PASSWORD: laravel
+    #         - POSTGRES_DB=postgres
+    #         - POSTGRES_USER=postgres
+    #         - POSTGRES_PASSWORD=postgres
     #     volumes:
-    #         - ./dockerDBData:/var/lib/mysql
+    #         - ./data/db:/var/lib/postgresql/data
     #     networks:
-    #         gus-php-network:
-    #             ipv4_address: 12.0.0.8
+    #         php-network:
+    #             ipv4_address: 12.0.0.9
     
-    # mailhog_yii:
+    # mailhog:
     #     image: mailhog/mailhog
-    #     container_name: mailhog_yii
+    #     container_name: mailhog
     #     ports:
     #         - 1025:1025
     #         - 8025:8025
     #     networks:
-    #          gus-php-network:
+    #          php-network:
     #             ipv4_address: 12.0.0.10
     
     # redis:
@@ -47,11 +48,11 @@ services:
     #     ports:
     #         - 6379:6379
     #     networks:
-    #         gus-php-network:
+    #         php-network:
     #             ipv4_address: 12.0.0.9
 
 networks:
-    gus-php-network:
+    php-network:
         driver: bridge
         ipam:
             driver: default

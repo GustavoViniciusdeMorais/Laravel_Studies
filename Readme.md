@@ -1,54 +1,51 @@
-# Gus PHP Setup Project
+# Bank Management
 
-```
-chmod u+x phpInstall.sh
-
-./phpInstall.sh
-
-composer.sh
-
-composer init
-```
-### PHP Doc Function
-Example:
-```php
-<?php
-/**
- * A summary informing the user what the associated element does.
- *
- * A *description*, that can span multiple lines, to go _in-depth_ into
- * the details of this element and to provide some background information
- * or textual references.
- *
- * @param string $myArgument With a *description* of this argument,
- *                           these may also span multiple lines.
- *
- * @return void
- */
- function myFunction($myArgument)
- {
- }
-```
-Rererences:
-- https://docs.phpdoc.org/guide/getting-started/what-is-a-docblock.html#example
-### Url Encode
-```php
-// Your code here!
-$url = "https://example.com?created>2015-09-01";
-$encodedUrl = urlencode($url);
-
-echo "Encoded URL: " . $encodedUrl;
-```
-### TryCatch
+### Setup application
 ```sh
-try {
-  # code ...
-} catch (\Exception $e) {
-   $response = [
-       'message' => $e->getMessage(),
-       'file' => $e->getFile(),
-       'line' => $e->getLine(),
-       'Details' => $e->getTrace(),
-   ];
-}
+sudo ./dockermg.sh -h
+sudo ./dockermg.sh --start
+sudo chmod -R 777 api/storage/
+sudo ./dockermg.sh api bash
+chmod u+x startServices.sh
+./startServices.sh
+cd api
+php artisan migrate
+php artisan db:seed
+```
+
+### Run tests
+```sh
+cd api
+php artisan migrate:refresh
+php artisan db:seed
+vendor/bin/phpunit --filter AccountExistsTest
+vendor/bin/phpunit --filter CreateAccountTest
+vendor/bin/phpunit --filter GetAccountByIdTest
+vendor/bin/phpunit --filter PurchaseDebitTest
+vendor/bin/phpunit --filter PurchaseCreditTest
+vendor/bin/phpunit --filter PixTransferTest
+```
+
+### Requests
+```sh
+curl --location 'localhost/api/accounts' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "test@gmail.com",
+    "balance": 500
+}'
+
+curl localhost/api/accounts?id=1
+
+curl --location 'localhost/api/transactions' \
+--header 'Content-Type: application/json' \
+--data '{"payment_type":"D","account_id":1, "value": 50}'
+
+curl --location 'localhost/api/transactions' \
+--header 'Content-Type: application/json' \
+--data '{"payment_type":"C","account_id":1, "value": 100}'
+
+curl --location 'localhost/api/transactions' \
+--header 'Content-Type: application/json' \
+--data '{"payment_type":"P","account_id":1, "value": 75}'
 ```
