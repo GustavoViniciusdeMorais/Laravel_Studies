@@ -4,56 +4,56 @@ services:
     nginx:
         build:
             context: .
-            dockerfile: ubuntu.dockerfile
+            dockerfile: nginx.dockerfile
         ports:
             - 80:80
         volumes:
             - ./:/var/www/html
-        container_name: gusphp
-        # depends_on:
-        #     - mysql
-        #     - mailhog_yii
+        container_name: pkg_nginx
+        depends_on:
+            - php
+            - mysql
         networks:
-            - gus-php-network
+            - pgk-network
 
-    # mysql:
-    #     image: mysql:5.7
-    #     restart: always
-    #     container_name: craftmysql
-    #     ports:
-    #         - 3306:3306
-    #     environment:
-    #         MYSQL_DATABASE: laravel
-    #         MYSQL_ROOT_PASSWORD: laravel
-    #     volumes:
-    #         - ./dockerDBData:/var/lib/mysql
-    #     networks:
-    #         gus-php-network:
-    #             ipv4_address: 12.0.0.8
-    
-    # mailhog_yii:
-    #     image: mailhog/mailhog
-    #     container_name: mailhog_yii
-    #     ports:
-    #         - 1025:1025
-    #         - 8025:8025
-    #     networks:
-    #          gus-php-network:
-    #             ipv4_address: 12.0.0.10
+    php:
+        build:
+            context: .
+            dockerfile: php.dockerfile
+        volumes:
+            - ./:/var/www/html
+        container_name: pkg_php
+        networks:
+            - pgk-network
+
+    mysql:
+        image: mysql:5.7
+        restart: always
+        container_name: pkg_mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: laravel
+        volumes:
+            - ./dockerDBData:/var/lib/mysql
+        networks:
+            pgk-network:
+                ipv4_address: 15.0.0.8
     
     # redis:
     #     image: redis
-    #     container_name: redis
+    #     container_name: pkg_redis
     #     ports:
     #         - 6379:6379
     #     networks:
-    #         gus-php-network:
-    #             ipv4_address: 12.0.0.9
+    #         pgk-network:
+    #             ipv4_address: 15.0.0.9
 
 networks:
-    gus-php-network:
+    pgk-network:
         driver: bridge
         ipam:
             driver: default
             config:
-                - subnet: "12.0.0.0/16"
+                - subnet: "15.0.0.0/16"

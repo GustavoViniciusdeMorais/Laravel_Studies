@@ -1,0 +1,25 @@
+{
+    "name": "modules/builder",
+    "description": "Package Builder",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Modules\\Builder\\": "src/"
+        }
+    },
+    "authors": [{
+        "name": "Gustavo Vinicius"
+    }],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Builder\\Providers\\GustavoPackageBuilderServiceProvider"
+            ],
+            "aliases": {
+                "GustavoPackageBuilder": "Modules\\Builder\\Facades\\GustavoPackageBuilderFacade"
+            }
+        }
+    }
+}
