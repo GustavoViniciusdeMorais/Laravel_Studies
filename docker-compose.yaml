@@ -9,13 +9,28 @@ services:
             - 80:80
         volumes:
             - ./:/var/www/html
-        container_name: gusphp
+        container_name: apiphp
         depends_on:
             # - postgres
             - my_rabbitmq
         networks:
             gus-laravel-network:
                 ipv4_address: 12.0.0.8
+    
+    apigateway:
+        build:
+            context: .
+            dockerfile: ./apigateway/apigateway.dockerfile
+        ports:
+            - 81:81
+        volumes:
+            - ./apigateway:/var/www/html
+        container_name: apigateway
+        depends_on:
+            - nginx
+        networks:
+            gus-laravel-network:
+                ipv4_address: 12.0.0.11
 
     # postgres:
     #     image: postgres
