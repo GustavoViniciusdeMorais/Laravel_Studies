@@ -11,12 +11,36 @@
 ### Start project
 ```sh
 docker compose up -d --build
-cd api
 chmod u+x startServices.sh
 ./startServices.sh
+cd api
+cp -R .env.example .env
+```
+
+### Config API Gateway
+```sh
+./dockermg.sh apigateway bash
+cat nginx.conf > /etc/nginx/nginx.conf
+nginx -t
+service nginx start
 ```
 
 ## Tests
+
+### User API
+```sh
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"first_name":"test","last_name":"test","email":"test@email.com","password":"test"}' localhost/api/users
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@email.com","password":"test"}' localhost:81/api/users/login
+
+token=""
+
+curl -X GET -H "Authorization: Bearer $token" localhost:81/api/users/verify
+```
 
 ### Articles GraphQL endpoint
 ```sh

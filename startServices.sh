@@ -15,6 +15,11 @@ database_file="$database_folder/database.sqlite"
 # Check if the SQLite database file exists, if not, create it
 if [ ! -f "$database_file" ]; then
     touch "$database_file"
+    chmod 777 "$database_folder";
     chmod -R 777 "$database_file";
     echo "Database file created.";
 fi
+
+mkdir api/storage
+mkdir api/storage/logs
+chmod 777 api/storage/*
