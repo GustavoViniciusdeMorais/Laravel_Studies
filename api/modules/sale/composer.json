@@ -1,0 +1,40 @@
+{
+    "name": "gustavomorais/sale",
+    "version": "1.0.0",
+    "description": "Sale package",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GustavoMorais\\Sale\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GustavoMorais\\Tests\\": "tests"
+        }
+    },    
+    "authors": [
+        {
+            "name": "Gustavo Vinicius"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GustavoMorais\\Sale\\Providers\\SaleProvider"
+            ],
+            "aliases": {
+                "Location": "GustavoMorais\\Sale\\Facades\\SaleFacade"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.2"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/routing": "^10.43",
+        "illuminate/http": "^10.43"
+    }
+}

@@ -12,6 +12,7 @@
         "php": "^8.1",
         "firebase/php-jwt": "^6.10",
         "gustavomorais/article": "^1.0",
+        "gustavomorais/sale": "^1.0",
         "gustavomorais/user": "^1.0",
         "illuminate/database": "^10.43",
         "laravel/lumen-framework": "^10.0",
@@ -48,6 +49,10 @@
         {
             "type": "path",
             "url": "modules/user"
+        },
+        {
+            "type": "path",
+            "url": "modules/sale"
         }
     ],
     "config": {

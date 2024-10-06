@@ -2,7 +2,8 @@
 
 <img src="./imgs/LumenAPI.png" width="500" height="300">
 
-### 
+### Details
+- [Package Configuration](./PackageConfiguration.md)
 - REST JSON
 - GraphQL
 - [Queue Messaging (RabbitMQ)](./RabbitMQ.md)

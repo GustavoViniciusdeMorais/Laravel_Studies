@@ -1,9 +1,5 @@
 # Package Configuration
 
-### 
-```
-```
-
 ### api/modules/article/composer.json
 ```json
 {

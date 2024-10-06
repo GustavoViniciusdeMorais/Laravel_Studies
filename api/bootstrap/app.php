@@ -25,6 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades(true, [
     'GustavoMorais\Article\Facades\ArticleFacade' => 'Article',
+    'GustavoMorais\Sale\Facades\SaleFacade' => 'Sale',
     ]);
 
 $app->withEloquent();
@@ -99,6 +100,7 @@ $app->configure('app');
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(GustavoMorais\Article\Providers\ArticleProvider::class);
 $app->register(GustavoMorais\User\Providers\UserProvider::class);
+$app->register(GustavoMorais\Sale\Providers\SaleProvider::class);
 
 /*
 |--------------------------------------------------------------------------
