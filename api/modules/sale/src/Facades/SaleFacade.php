@@ -1,19 +1,13 @@
 <?php
 
-namespace GustavoMorais\Sale\Providers;
+namespace GustavoMorais\Sale\Facades;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Facade;
 
-class SaleProvider extends ServiceProvider
+class SaleFacade extends Facade
 {
-    public function boot()
+    protected static function getFacadeAccessor()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-    }
-
-    public function register()
-    {
-        // register singleton if needed
+        return 'sale';
     }
 }
