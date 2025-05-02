@@ -1,5 +1,7 @@
 # Gus PHP Setup Project
 
+- [Collections](./tutorials/collection.md)
+
 ```
 chmod u+x phpInstall.sh
 
