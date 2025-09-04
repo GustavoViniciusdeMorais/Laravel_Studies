@@ -11,18 +11,19 @@ use Illuminate\Support\Collection;
 
 $productsCollection = new Collection();
 
+//$products = [['id' => 1,'name' => 'test1'],['id' => 2,'name' => 'test2']];
 $products = [
     [
         'id' => 1,
         'name' => 'test1'
     ],
     [
-        'id' => 1,
-        'name' => 'test1'
+        'id' => 2,
+        'name' => 'test2'
     ]
 ];
 
-$productsCollection->put($products);
+$productsCollection->put('data', $products);
 
 $productsCollection = $productsCollection->sort();
 
