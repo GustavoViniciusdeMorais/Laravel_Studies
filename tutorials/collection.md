@@ -5,7 +5,11 @@
 ```bash
 php artisan tinker
 ```
-
+```bash
+php -a
+require 'vendor/autoload.php';
+$productsCollection = new Illuminate\Support\Collection();
+```
 ```php
 use Illuminate\Support\Collection;
 
