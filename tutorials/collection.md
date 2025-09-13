@@ -8,7 +8,13 @@ php artisan tinker
 ```bash
 php -a
 require 'vendor/autoload.php';
-$productsCollection = new Illuminate\Support\Collection();
+
+$list2 = new Illuminate\Support\Collection();
+
+$list2->push(['id'=>1,'name'=>'test']);
+$list2->push(['id'=>2,'name'=>'test2']);
+
+$list2->each(function($item) { print_r($item['name']); });
 ```
 ```php
 use Illuminate\Support\Collection;
