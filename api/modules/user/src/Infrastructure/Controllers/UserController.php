@@ -28,9 +28,7 @@ class UserController extends BaseController
     public function getUsers()
     {
         try {
-            return $this->success(
-                (new GetUsersAction())->execute()
-            );
+            return (new GetUsersAction())->execute();
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
