@@ -40,3 +40,25 @@ $productsCollection = $productsCollection->sort();
 $productsCollection->values()->all();
 
 ```
+#### The chain filters odd-id products, maps them to uppercase names, reindexes keys with values(), and converts to a plain array with all().
+```php
+<?php
+use Illuminate\Support\Collection;
+
+$products = new Collection([
+    ['id' => 1, 'name' => 'Notebook'],
+    ['id' => 2, 'name' => 'Mouse'],
+    ['id' => 3, 'name' => 'Keyboard'],
+]);
+
+$result = $products
+    ->filter(fn ($product) => $product['id'] % 2 !== 0)  // only odd ids
+    ->map(fn ($product) => [
+        'id'   => $product['id'],
+        'name' => strtoupper($product['name']),
+    ])
+    ->values()
+    ->all();
+
+// Result: [['id' => 1, 'name' => 'NOTEBOOK'], ['id' => 3, 'name' => 'KEYBOARD']]
+```
